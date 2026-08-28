@@ -1,7 +1,0 @@
-{
-  "app_status": "active",
-  "banner_message": "رمضان كريم",
-  "enable_adhan_audio": true,
-  "min_version_required": 1,
-  "default_muezzin": "makkah"
-}
