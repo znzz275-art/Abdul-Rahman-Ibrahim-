@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم السحابية | تطبيق أخي المسلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A3C34;
+            --primary-light: #2A5A4E;
+            --accent: #C5A880;
+            --bg: #F4F6F5;
+            --card-bg: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --danger: #EF4444;
+            --success: #10B981;
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-dark);
+            padding: 24px 16px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: #fff;
+            padding: 28px 24px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(26, 60, 52, 0.15);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        header p {
+            color: #E2E8F0;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: #1A3C34;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E2E8F0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #FAFAFA;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            background: #FFF;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 60, 52, 0.1);
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #F8FAFC;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #CBD5E1;
+            transition: .3s;
+            border-radius: 26px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: #F0FDF4;
+        }
+
+        .preview-box {
+            background: #0F172A;
+            color: #38BDF8;
+            padding: 16px;
+            border-radius: 10px;
+            direction: ltr;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            max-height: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>🕌 لوحة تحكم تطبيق أخي المسلم</h1>
+            <p>تحكم في ميزات وتنبيهات ورسائل التطبيق للمستخدمين عن بُعد</p>
+        </div>
+        <span class="badge">Google Play Ready</span>
+    </header>
+
+    <!-- الحالة العامة والتحديث -->
+    <div class="card">
+        <div class="card-header">
+            <h2>⚙️ حالة التطبيق العامة</h2>
+        </div>
+        
+        <div class="form-group">
+            <label>حالة التطبيق</label>
+            <select id="app_status">
+                <option value="active">🟢 التطبيق يعمل بشكل طبيعي (Active)</option>
+                <option value="maintenance">🔴 وضع الصيانة المؤقتة (Maintenance)</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="maintenance_group">
+            <label>رسالة الصيانة للمستخدمين</label>
+            <input type="text" id="maintenance_message" value="التطبيق قيد الصيانة مؤقتاً، سنعود قريباً إن شاء الله.">
+        </div>
+
+        <div class="form-group">
+            <label>أقل إصدار مطلوب (Min Version)</label>
+            <input type="number" id="min_version" value="1">
+            <p class="hint">لو رفعت تحديث جديد على Google Play وتريد إجبار المستخدمين على التحديث، ضع رقم الإصدار الجديد هنا.</p>
+        </div>
+
+        <div class="form-group">
+            <label>رابط صفحة التطبيق على Google Play</label>
+            <input type="text" id="update_url" placeholder="https://play.google.com/store/apps/details?id=...">
+        </div>
+    </div>
+
+    <!-- شريط الإعلانات والتهنئة -->
+    <div class="card">
+        <div class="card-header">
+            <h2>📢 شريط التنبيهات والتهنئة (Banner)</h2>
+        </div>
+
+        <div class="switch-container form-group">
+            <div>
+                <strong>إظهار شريط التنبيهات في التطبيق</strong>
+                <p class="hint">يظهر شريط أعلى الشاشة الرئيسية لكل المستخدمين</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="show_banner" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label>عنوان التنبيه</label>
+            <input type="text" id="banner_title" value="تهنئة وتنبيه">
+        </div>
+
+        <div class="form-group">
+            <label>نص الرسالة</label>
+            <textarea id="banner_message" rows="3">أهلاً بكم في تطبيق أخي المسلم! نسأل الله أن يتقبل منا ومنكم صالح الأعمال.</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>رابط خارجي عند النقر على التنبيه (اختياري)</label>
+            <input type="text" id="banner_url" placeholder="https://...">
+        </div>
+    </div>
+
+    <!-- إعدادات الأذان والصوت -->
+    <div class="card">
+        <div class="card-header">
+            <h2>🔊 التحكم في الأذان والميزات</h2>
+        </div>
+
+        <div class="switch-container form-group">
+            <div>
+                <strong>تفعيل أصوات الأذان تلقائياً</strong>
+                <p class="hint">إمكانية إيقاف تشغيل الأذان الصوتي لجميع الهواتف عن بُعد في الحالات الطارئة</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="enable_adhan_audio" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- المعاينة وتصدير الملف -->
+    <div class="card">
+        <div class="card-header">
+            <h2>📄 ملف الإعدادات المتولد (config.json)</h2>
+        </div>
+        <pre class="preview-box" id="json_preview"></pre>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="downloadJSON()">
+                📥 تحميل ملف config.json المحدث
+            </button>
+            <button class="btn btn-outline" onclick="copyJSON()">
+                📋 نسخ كود JSON
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const fields = [
+        'app_status', 'maintenance_message', 'min_version', 'update_url',
+        'show_banner', 'banner_title', 'banner_message', 'banner_url',
+        'enable_adhan_audio'
+    ];
+
+    function generateConfig() {
+        const config = {
+            app_status: document.getElementById('app_status').value,
+            maintenance_message: document.getElementById('maintenance_message').value,
+            min_version: parseInt(document.getElementById('min_version').value) || 1,
+            update_url: document.getElementById('update_url').value,
+            show_banner: document.getElementById('show_banner').checked,
+            banner_title: document.getElementById('banner_title').value,
+            banner_message: document.getElementById('banner_message').value,
+            banner_url: document.getElementById('banner_url').value,
+            enable_adhan_audio: document.getElementById('enable_adhan_audio').checked
+        };
+
+        const jsonStr = JSON.stringify(config, null, 2);
+        document.getElementById('json_preview').textContent = jsonStr;
+        return jsonStr;
+    }
+
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', generateConfig);
+            el.addEventListener('change', generateConfig);
+        }
+    });
+
+    function downloadJSON() {
+        const jsonStr = generateConfig();
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'config.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function copyJSON() {
+        const jsonStr = generateConfig();
+        navigator.clipboard.writeText(jsonStr).then(() => {
+            alert('تم نسخ الكود بنجاح!');
+        });
+    }
+
+    // Initial render
+    generateConfig();
+</script>
+
+</body>
+</html>
